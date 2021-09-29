@@ -19,6 +19,13 @@ public class MatrixTest {
 		assertEquals(3, A.getRows());
 	}
 
+    @Test
+    public void testIntConst1(){
+        Matrix A = new Matrix(3, 1, 1.0);
+        assertEquals(A.getRows(), 3);
+        assertEquals(A.getCols(), 1);
+    }
+
 	@Test
 	public void testtimes1()
 	{
@@ -42,7 +49,6 @@ public class MatrixTest {
 		double[][] vals3 = {{6.},{15.},{24.}};
 		assertArrayEquals(vals3, C.getMatrix());
 	}
-
 
 }
 

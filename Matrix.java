@@ -18,7 +18,17 @@ public class Matrix
 		rows = A.length;
 		cols = A[0].length;
 	}
-
+  
+  public Matrix(int m, int n, double s){
+    double[][] mat = new double[m][n];
+    for(int i = 0; i < m; i++){
+      for (int j = 0; j < n; j++){
+        mat[i][j] = s;
+      }
+    }
+    matrix = mat;
+  }
+  
 	public static void main(String[] args)
 	{
 		
