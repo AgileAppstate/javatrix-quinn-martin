@@ -4,59 +4,70 @@ public class Matrix
 	private int rows;
 	private int cols;
 
-	public Matrix(double[][] A)
+	public Matrix(double[][] M)
 	{
-		for(int i=1; i < A.length; i++)
+		for(int i=1; i < M.length; i++)
 		{
-			if(A[i].length != A[i-1].length)
+			if(M[i].length != M[i-1].length)
 			{
 				throw new IllegalArgumentException("All rows must have the same length");
 			}
 		}
 		
-		matrix = A;
-		rows = A.length;
-		cols = A[0].length;
+		setMatrix(M);
+		setRows(M.length);
+		setCols(M[0].length);
 	}
   
-  public Matrix(int m, int n, double s){
-    double[][] mat = new double[m][n];
-    for(int i = 0; i < m; i++){
-      for (int j = 0; j < n; j++){
-        mat[i][j] = s;
-      }
-    }
-    matrix = mat;
-  }
+	public Matrix(int m, int n, double s)
+	{
+		double[][] M = new double[m][n];
+		setMatrix(M);
+		setRows(m);
+		setCols(n);
+		for(int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				setMatrixPos(i, j, s);
+			}
+		}
+	}
   
 	public static void main(String[] args)
 	{
-		
+
 	}
 
 	public Matrix times(Matrix B)
 	{
-		if (this.cols != B.rows)
+		if (this.getCols() != B.getRows())
 		{
 			throw new IllegalArgumentException("Column Row Missmatch"); 
 		}
-		Matrix C = new Matrix(this.rows, B.cols, 0.);
-		for(int i=0; i < this.rows; i++)
+		
+		Matrix C = new Matrix(this.getRows(), B.getCols(), 0.);
+		for(int i=0; i < this.getRows(); i++)
 		{
-			for(int j=0; j < B.cols; j++)
+			for(int j=0; j < B.getCols(); j++)
 			{
-				for(int k=0; k < B.rows; k++)
+				for(int k=0; k < B.getRows(); k++)
 				{
-					C.matrix[i][j] += this.matrix[i][k] * B.matrix[k][j];
+					C.incrMatrixPos(i, j, (this.getMatrixPos(i, k) * B.getMatrixPos(k, j)));
 				}
 			}
 		}
 		return C;
 	}
 
+	//getters
 	public double[][] getMatrix()
 	{
 		return matrix;
+	}
+	public double getMatrixPos(int m, int n)
+	{
+		return matrix[m][n];
 	}
 	public int getRows()
 	{
@@ -65,6 +76,40 @@ public class Matrix
 	public int getCols()
 	{
 		return cols;
+	}
+	
+	//setters
+	public void setMatrix(double[][] M)
+	{
+		matrix = M;
+	}
+	public void setMatrixPos(int m, int n, double s)
+	{
+		matrix[m][n] = s;
+	}
+	public void incrMatrixPos(int m, int n, double s)
+	{
+		matrix[m][n] += s;
+	}
+	public void decrMatrixPos(int m, int n, double s)
+	{
+		matrix[m][n] -= s;
+	}
+	public void setRows(int m)
+	{
+		if(m <= 0)
+		{
+			throw new IllegalArgumentException("Rows Passed in Not Greater than Zero");
+		}
+		rows = m;
+	}
+	public void setCols(int n)
+	{
+		if(n <= 0)
+		{
+			throw new IllegalArgumentException("Columns Passed in Not Greater than Zero");
+		}
+		cols = n;
 	}
 
 }
