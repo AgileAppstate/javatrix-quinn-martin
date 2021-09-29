@@ -16,5 +16,12 @@ public class MatrixTest {
 		assertEquals(A.getRows(), 3);
 		assertEquals(A.getRows(), 3);
 	}
+
+    @Test
+    public void testMatrix2(){
+        Matrix A = new Matrix(3, 1, 1.0);
+        assertEquals(A.getRows(), 3);
+        assertEquals(A.getCols(), 1);
+    }
 }
 
