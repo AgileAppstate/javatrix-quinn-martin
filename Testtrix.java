@@ -1,4 +1,4 @@
-import javatrix.*;
+import Matrix.*;
 
 public class Testtrix {
     public static void main(String[] args) {
