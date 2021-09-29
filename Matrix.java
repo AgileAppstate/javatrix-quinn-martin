@@ -1,33 +1,57 @@
-public class Matrix {
+public class Matrix
+{
 	private double[][] matrix;
 	private int rows;
 	private int cols;
 
-	public Matrix(double[][] A) {
-        	if(A.length != A[0].length)
+	public Matrix(double[][] A)
+	{
+		for(int i=1; i < A.length; i++)
 		{
-                	System.out.println("All rows must have the same length");
+			if(A[i].length != A[i-1].length)
+			{
+				throw new IllegalArgumentException("All rows must have the same length");
+			}
 		}
-		else
-		{
-			matrix = A;
-			rows = A.length;
-			cols = A[0].length;
-		}
+		
+		matrix = A;
+		rows = A.length;
+		cols = A[0].length;
+	}
+  
+  public Matrix(int m, int n, double s){
+    double[][] mat = new double[m][n];
+    for(int i = 0; i < m; i++){
+      for (int j = 0; j < n; j++){
+        mat[i][j] = s;
+      }
+    }
+    matrix = mat;
+  }
+  
+	public static void main(String[] args)
+	{
+		
 	}
 
-    public Matrix(int m, int n, double s){
-        double[][] mat = new double[m][n];
-        for(int i = 0; i < m; i++){
-            for (int j = 0; j < n; j++){
-                mat[i][j] = s;
-            }
-        }
-        matrix = mat;
-    }
-
-	public static void main(String[] args) {
-		
+	public Matrix times(Matrix B)
+	{
+		if (this.cols != B.rows)
+		{
+			throw new IllegalArgumentException("Column Row Missmatch"); 
+		}
+		Matrix C = new Matrix(this.rows, B.cols, 0.);
+		for(int i=0; i < this.rows; i++)
+		{
+			for(int j=0; j < B.cols; j++)
+			{
+				for(int k=0; k < B.rows; k++)
+				{
+					C.matrix[i][j] += this.matrix[i][k] * B.matrix[k][j];
+				}
+			}
+		}
+		return C;
 	}
 
 	public double[][] getMatrix()
