@@ -36,7 +36,8 @@ public class Matrix
   
 	public static void main(String[] args)
 	{
-
+        Matrix m = new Matrix(3, 3, 1.1);
+        m.print(10, 2);
 	}
 
 	public Matrix times(Matrix B)
@@ -111,6 +112,18 @@ public class Matrix
 		}
 		cols = n;
 	}
+
+    public void print(int w, int d){
+        String format = "%" + w + "." + d + "f";
+        for (int m = 0; m < getRows(); m++)
+        {
+             for (int n = 0; n < getCols(); n++)
+             {
+                 System.out.printf(format, getMatrixPos(m, n));
+             }
+             System.out.println("");
+        }
+    }
 
 }
 

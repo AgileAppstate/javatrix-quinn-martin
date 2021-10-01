@@ -85,6 +85,27 @@ public class MatrixTest {
 		double[][] vals3 = {{6.},{15.},{24.}};
 		assertArrayEquals(vals3, C.getMatrix());
 	}
+    
+    @Test
+    public void testPrint1()
+    {
+        double[][] vals = {{1.,2.,3.},{4.,5.,6.},{7.,8.,9.}};
+        Matrix A = new Matrix(vals);
+        String correctString = String.format("%9.4f", "%9.4f", "%9.4f", "%9.4f", "%9.4f", "%9.4f", "%9.4f", "%9.4f", "%9.4f",
+                                1., 2., 3., 4., 5., 6., 7., 8., 9.);
+        
+        
+        PrintStream origOut = System.out;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream newOut = new PrintStream(baos);
+        System.setOut(newOut);
 
+        A.print(9,4);
+        System.out.flush();
+        testOutput = baos.toString();
+
+        assertEquals(correctString, testOutput);
+        System.setOut(origOut);
+    }
 }
 
