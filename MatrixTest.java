@@ -63,7 +63,7 @@ public class MatrixTest {
 	}
 
 	@Test
-	public void testtimes1()
+	public void testTimes1()
 	{
 		double[][] vals1 = {{3.,4.},{7.,2.},{5.,9.}};
 		double[][] vals2 = {{3.,1.,5.},{6.,9.,7.}};
@@ -84,6 +84,67 @@ public class MatrixTest {
 		Matrix C = A.times(B);
 		double[][] vals3 = {{6.},{15.},{24.}};
 		assertArrayEquals(vals3, C.getMatrix());
+	}
+    
+	@Test
+	public void testPrint1()
+	{
+		double[][] vals = {{1.,2.,3.},{4.,5.,6.},{7.,8.,9.}};
+		Matrix A = new Matrix(vals);
+		
+		String formatStr = "";
+		for (int i = 0; i < A.getRows(); i++)
+		{
+			for (int j = 0; j < A.getCols(); j++)
+			{
+				formatStr += "%9.4f";
+			}
+			formatStr += '\n';
+		}
+		String correctString = String.format(formatStr, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
+
+		PrintStream origOut = System.out;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream newOut = new PrintStream(baos);
+		System.setOut(newOut);
+
+		System.out.flush();
+		A.print(9, 4);
+		String testOutput = baos.toString();
+
+		assertEquals(correctString, testOutput);
+		System.setOut(origOut);
+	}
+
+	@Test
+	public void testPrint2()
+	{
+		double[][] vals = {{0.13,22.5,-3.888},{72.,-68.124,0.1987}};
+		Matrix A = new Matrix(vals);
+	
+		String formatStr = "";
+		for (int i = 0; i < A.getRows(); i++)
+		{
+			for (int j = 0; j < A.getCols(); j++)
+			{
+				formatStr += "%5.2f";
+			}
+			formatStr += '\n';
+		}
+		String correctString = String.format(formatStr, 0.13, 22.5, -3.888, 72., -68.124, 0.1987);
+
+		PrintStream origOut = System.out;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream newOut = new PrintStream(baos);
+		System.setOut(newOut);
+
+		System.out.flush();
+		A.print(5, 2);
+		String testOutput = baos.toString();
+
+		assertEquals(correctString, testOutput);
+		System.setOut(origOut);
+
 	}
 
 }
