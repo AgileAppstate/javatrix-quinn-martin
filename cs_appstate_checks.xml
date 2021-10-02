@@ -30,6 +30,7 @@ Checkstyle configuration for CS department at Appalachian State University
 
         <!-- Section 4.1 -->
         <module name="Indentation">
+            <property name="tabWidth" value="4"/>
             <property name="caseIndent" value="4"/>
         </module>
         <module name="LineLength">
