@@ -1,5 +1,9 @@
-/* 
- * junit5 test class
+/**
+ * junit5 test class.
+ * MatrixTest.java
+ * @author Quinn Corcoran
+ * @author Martin Hernandez-gamez
+ * @version Fall 2021
 */
 
 import java.io.*;
@@ -92,16 +96,11 @@ public class MatrixTest {
 		double[][] vals = {{1.,2.,3.},{4.,5.,6.},{7.,8.,9.}};
 		Matrix A = new Matrix(vals);
 		
-		String formatStr = "";
-		for (int i = 0; i < A.getRows(); i++)
-		{
-			for (int j = 0; j < A.getCols(); j++)
-			{
-				formatStr += "%9.4f";
-			}
-			formatStr += '\n';
-		}
-		String correctString = String.format(formatStr, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
+		String formatStr = "%9.4f%9.4f%9.4f\n%9.4f%9.4f%9.4f"
+				+ "\n%9.4f%9.4f%9.4f\n";
+
+		String correctString = String.format(formatStr, 1., 2.,
+						3., 4., 5., 6., 7., 8., 9.);
 
 		PrintStream origOut = System.out;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -122,16 +121,10 @@ public class MatrixTest {
 		double[][] vals = {{0.13,22.5,-3.888},{72.,-68.124,0.1987}};
 		Matrix A = new Matrix(vals);
 	
-		String formatStr = "";
-		for (int i = 0; i < A.getRows(); i++)
-		{
-			for (int j = 0; j < A.getCols(); j++)
-			{
-				formatStr += "%5.2f";
-			}
-			formatStr += '\n';
-		}
-		String correctString = String.format(formatStr, 0.13, 22.5, -3.888, 72., -68.124, 0.1987);
+		String formatStr = "%5.2f%5.2f%5.2f\n%5.2f%5.2f%5.2f\n";
+
+		String correctString = String.format(formatStr, 0.13, 22.5,
+						-3.888, 72., -68.124, 0.1987);
 
 		PrintStream origOut = System.out;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -144,7 +137,50 @@ public class MatrixTest {
 
 		assertEquals(correctString, testOutput);
 		System.setOut(origOut);
+	}
 
+	@Test
+	public void testTesttrix()
+	{
+		double[][] vals = {{1.,2.,3},{4.,5.,6.},{7.,8.,9.}};
+
+		Matrix A = new Matrix(vals);
+		Matrix x = new Matrix(3, 1, 1.);
+		Matrix b = A.times(x);
+
+		String formatA = "%9.4f%9.4f%9.4f\n%9.4f%9.4f%9.4f"
+				+ "\n%9.4f%9.4f%9.4f\n";
+		formatA = String.format(formatA, 1., 2.,
+					3., 4., 5., 6., 7., 8., 9.);
+
+		String formatx = "%9.4f\n%9.4f\n%9.4f\n";
+		formatx = String.format(formatx, 1., 1., 1.);
+
+		String formatb = "%9.4f\n%9.4f\n%9.4f\n";
+		formatb = String.format(formatb, 6., 15., 24.);
+
+
+		String correctString = formatA + "x\n" + formatx
+					+ "=\n" + formatb;
+
+		PrintStream origOut = System.out;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream newOut = new PrintStream(baos);
+		System.setOut(newOut);
+
+		System.out.flush();
+
+
+		A.print(9,4);
+		System.out.println("x");
+		x.print(9,4);
+		System.out.println("=");
+		b.print(9,4);
+
+		String testOutput = baos.toString();
+
+		assertEquals(correctString, testOutput);
+		System.setOut(origOut);
 	}
 
 }
