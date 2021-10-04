@@ -1,3 +1,11 @@
+package javatrix;
+
+import java.io.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
 /**
  * junit5 test class.
  * MatrixTest.java
@@ -5,12 +13,6 @@
  * @author Martin Hernandez-gamez
  * @version Fall 2021
 */
-
-import java.io.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.Assert.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 public class MatrixTest {
 
@@ -169,7 +171,6 @@ public class MatrixTest {
 		System.setOut(newOut);
 
 		System.out.flush();
-
 
 		A.print(9,4);
 		System.out.println("x");
