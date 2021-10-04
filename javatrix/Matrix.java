@@ -1,5 +1,8 @@
+package javatrix;
+
 /**
  * Matrix Class.
+ * Matrix.java
  * @author Quinn Corcoran
  * @author Martin Hernandez-gamez
  * @version Fall 2021
