@@ -184,5 +184,29 @@ public class MatrixTest {
 		System.setOut(origOut);
 	}
 
+	@Test
+	public void testTranspose1()
+	{
+		double[][] vals1 = {{1.,2.,3},{4.,5.,6.},{7.,8.,9.}};
+		double[][] vals2 = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
+
+		Matrix A = new Matrix(vals1);
+		Matrix B = A.transpose();
+
+		assertArrayEquals(vals2, B.getMatrix());
+	}
+
+	@Test
+	public void testTranspose2()
+	{
+		double[][] vals1 = {{-12.,33.},{9.,0.},{3.,67.}};
+		double[][] vals2 = {{-12.,9.,3.},{33.,0.,67.}};
+
+		Matrix A = new Matrix(vals1);
+		Matrix B = A.transpose();
+
+		assertArrayEquals(vals2, B.getMatrix());
+	}
+
 }
 

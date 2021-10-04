@@ -11,14 +11,17 @@ package javatrix;
 public class Matrix
 {
 	/*
- 	 * Matrix Class Fields.
+ 	 * Matrix class fields.
  	*/ 
 	private double[][] matrix;
 	private int rows;
 	private int cols;
 
+	/*
+	 * Matrix class constructors.
+	*/
 	/**
- 	 * Matrix Class Constructor.
+ 	 * Matrix class Constructor.
  	 * @param matM double[][]
  	*/
 	public Matrix(double[][] matM)
@@ -38,7 +41,7 @@ public class Matrix
 	}
   
 	/**
- 	 * Matrix Class Constructor.
+ 	 * Matrix class constructor.
 	 * @param m int
 	 * @param n int
 	 * @param s double
@@ -58,6 +61,9 @@ public class Matrix
 		}
 	}
 
+	/*
+	 * Matrix class methods.
+	*/
 	/**
  	 * main method.
  	 * @param args String[]
@@ -111,6 +117,24 @@ public class Matrix
 			System.out.println("");
 		}
 	}
+
+	/**
+	 * mthod to transpose a matrix.
+	 * @return trans Matrix
+	*/
+	public Matrix transpose()
+	{
+		Matrix trans = new Matrix(this.getCols(), this.getRows(), 0.);
+		for (int i = 0; i < this.getRows(); i++)
+		{
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				trans.setMatrixPos(j, i, this.getMatrixPos(i, j));
+			}
+		}
+		return trans;
+	}
+
 
 	/* getters */
 	/**
