@@ -2,6 +2,8 @@ package javatrix;
 
 import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.function.Executable;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class MatrixTest {
 
+
 	@Test
 	public void test2Dconst1()
 	{
@@ -27,6 +30,22 @@ public class MatrixTest {
 		assertEquals(6., A.getMatrixPos(1, 2));
 		assertEquals(7., A.getMatrixPos(2, 0));
 		assertArrayEquals(vals, A.getMatrix());
+	}
+
+	@Test
+	//Test for failure
+	public void test2Dconst2()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable 
+			{
+				double[][] vals = {{1.,2.,3.,.4},{5.,6.},{7.}};
+				Matrix A = new Matrix(vals);
+			}
+		});
+		assertEquals("All rows must have the same length", exception.getMessage());
 	}
 
 	@Test
@@ -69,6 +88,36 @@ public class MatrixTest {
 	}
 
 	@Test
+	//Test for failure
+	public void testSetters3()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(-3, 4, 7.);
+			}
+		});
+		assertEquals("Rows Passed in Not Greater than Zero", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters4()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,-4,.7);
+			}
+		});
+		assertEquals("Columns Passed in Not Greater than Zero", exception.getMessage());
+	}
+
+	@Test
 	public void testTimes1()
 	{
 		double[][] vals1 = {{3.,4.},{7.,2.},{5.,9.}};
@@ -91,7 +140,24 @@ public class MatrixTest {
 		double[][] vals3 = {{6.},{15.},{24.}};
 		assertArrayEquals(vals3, C.getMatrix());
 	}
-    
+
+	@Test
+	//Test for failure
+	public void testTimes3()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				Matrix B = new Matrix(3,4,.8);
+
+				Matrix C = A.times(B);
+			}
+		});
+		assertEquals("Multiplication Column Row Mismatch", exception.getMessage());
+	}
+
 	@Test
 	public void testPrint1()
 	{
