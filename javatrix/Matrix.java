@@ -48,10 +48,10 @@ public class Matrix
  	*/ 
 	public Matrix(int m, int n, double s)
 	{
-		double[][] matM = new double[m][n];
-		setMatrix(matM);
 		setRows(m);
 		setCols(n);
+		double[][] matM = new double[m][n];
+		setMatrix(matM);
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -82,7 +82,8 @@ public class Matrix
 	{
 		if (this.getCols() != matB.getRows())
 		{
-			throw new IllegalArgumentException("Column Row Missmatch"); 
+			throw new IllegalArgumentException("Multiplication "
+							+ "Column Row Mismatch"); 
 		}
 		
 		Matrix matC = new Matrix(this.getRows(), matB.getCols(), 0.);
