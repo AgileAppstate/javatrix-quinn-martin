@@ -1,5 +1,7 @@
 package javatrix;
 
+import java.lang.Math;
+
 /**
  * Matrix Class.
  * Matrix.java
@@ -134,6 +136,29 @@ public class Matrix
 			}
 		}
 		return trans;
+	}
+
+	/**
+ 	 * method to find the max colum sum.
+ 	 * @return norm double
+	*/
+	public double norm1()
+	{
+		double norm = 0.;
+		double temp = 0.;
+		for (int i = 0; i < getCols(); i++)
+		{
+			for (int j = 0; j < getRows(); j++)
+			{
+				temp += Math.abs(getMatrixPos(j, i));
+			}
+			if (temp > norm)
+			{
+				norm = temp;
+			}
+			temp = 0;
+		}
+		return norm;
 	}
 
 
