@@ -1,5 +1,7 @@
 package javatrix;
 
+import java.lang.Math;
+
 /**
  * Matrix Class.
  * Matrix.java
@@ -120,7 +122,7 @@ public class Matrix
 	}
 
 	/**
-	 * mthod to transpose a matrix.
+	 * method to transpose a matrix.
 	 * @return trans Matrix
 	*/
 	public Matrix transpose()
@@ -134,6 +136,29 @@ public class Matrix
 			}
 		}
 		return trans;
+	}
+
+	/**
+	 * method to compute maximum row sum.
+	 * @return norm double
+	*/
+	public double normInf()
+	{
+		double norm = 0.;
+		double temp = 0.;
+		for (int i = 0; i < getRows(); i++)
+		{
+			for (int j = 0; j < getCols(); j++)
+			{
+				temp += Math.abs(getMatrixPos(i, j));
+			}
+			if (norm < temp)
+			{
+				norm = temp;
+			}
+			temp = 0;
+		}
+		return norm;
 	}
 
 

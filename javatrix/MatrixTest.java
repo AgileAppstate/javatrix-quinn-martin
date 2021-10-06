@@ -274,5 +274,28 @@ public class MatrixTest {
 		assertArrayEquals(vals2, B.getMatrix());
 	}
 
+	@Test
+	public void testNormInf1()
+	{
+		double[][] vals = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
+		double correctValue = 18.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.normInf());
+	}
+
+	@Test
+	public void testNormInf2()
+	{
+		double[][] vals = {{-1.,4.,-7.},{2.,5.,8.},{3.,-6.,-9.}};
+		double correctValue = 18.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.normInf());
+	}
+	
+
 }
 
