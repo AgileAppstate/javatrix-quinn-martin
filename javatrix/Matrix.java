@@ -159,9 +159,9 @@ public class Matrix
             temp = 0;
         }
         return norm;
-    }
+    	}
 
-    /**
+    	/**
 	 * method to subtract two matrices.
 	 * @param matB Matrix
 	 * @return matC Matrix
@@ -187,7 +187,7 @@ public class Matrix
 	}
 
 
-    /**
+    	/**
  	 * method to find the max colum sum.
  	 * @return norm double
 	*/
@@ -210,22 +210,22 @@ public class Matrix
 		return norm;
 	}
 
-    /**
-     * Method to create an Matrix of random elements
-     * @return mat Matrix of random elements
-    */
-    public static Matrix random(int m, int n)
-    {
-        Matrix mat = new Matrix(m, n, 0.0);
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                mat.setMatrixPos(i, j, Math.random());
-            }
-        }
-        return mat;
-    }
+    	/**
+     	* Method to create an Matrix of random elements
+     	* @return mat Matrix of random elements
+    	*/
+    	public static Matrix random(int m, int n)
+    	{
+        	Matrix mat = new Matrix(m, n, 0.0);
+        	for (int i = 0; i < m; i++)
+        	{
+            		for (int j = 0; j < n; j++)
+            		{
+                	mat.setMatrixPos(i, j, Math.random());
+            		}
+        	}
+        	return mat;
+    	}
 
 
 	/* getters */
