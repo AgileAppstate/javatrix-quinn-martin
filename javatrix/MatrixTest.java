@@ -296,7 +296,7 @@ public class MatrixTest {
 		assertEquals(correctValue, A.normInf());
 	}
 	
-    @Test
+    	@Test
 	public void testMinus1()
 	{
 		double[][] vals1 = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
@@ -328,7 +328,7 @@ public class MatrixTest {
 		assertEquals("Cannot Subtract Unequal Size Arrays", exception.getMessage());
     }
 
-    @Test
+    	@Test
 	public void testNorm11()
 	{
 		double[][] vals = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
@@ -348,26 +348,26 @@ public class MatrixTest {
 		Matrix A = new Matrix(vals);
 
 		assertEquals(correctValue, A.norm1());
-    }
+    	}
 
-    @Test
-    public void testIdentity1()
-    {
-        double[][] vals = {{1.0, 0.0, 0.0},{0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    	@Test
+    	public void testIdentity1()
+    	{
+        	double[][] vals = {{1.0, 0.0, 0.0},{0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
-        Matrix A = Matrix.identity(3, 3);
+        	Matrix A = Matrix.identity(3, 3);
 
-        assertArrayEquals(vals, A.getMatrix());
-    }
+        	assertArrayEquals(vals, A.getMatrix());
+	}
 
-    @Test
-    public void testIdentity2()
-    {
-        double[][] vals = {{1.0, 0.0},{0.0, 1.0}};
+    	@Test
+    	public void testIdentity2()
+    	{
+        	double[][] vals = {{1.0, 0.0},{0.0, 1.0}};
 
-        Matrix A = Matrix.identity(2, 2);
+        	Matrix A = Matrix.identity(2, 2);
 
-        assertArrayEquals(vals, A.getMatrix());
-    }
+        	assertArrayEquals(vals, A.getMatrix());
+    	}
 }
 
