@@ -153,6 +153,55 @@ public class Matrix
 				temp += Math.abs(getMatrixPos(i, j));
 			}
 			if (norm < temp)
+            {
+                norm = temp;
+            }
+            temp = 0;
+        }
+        return norm;
+    }
+
+    /**
+	 * method to subtract two matrices.
+	 * @param matB Matrix
+	 * @return matC Matrix
+	*/
+	public Matrix minus(Matrix matB)
+	{
+		if (this.getRows() != matB.getRows()
+			 || this.getCols() != matB.getCols())
+		{
+			throw new IllegalArgumentException("Cannot Subtract "
+							+ "Unequal Size Arrays");
+		}
+		Matrix matC = new Matrix(matB.getRows(), matB.getCols(), 0.);
+		for (int i = 0; i < matB.getRows(); i++)
+		{
+			for (int j = 0; j < matB.getCols(); j++)
+			{
+				matC.setMatrixPos(i, j, (this.getMatrixPos(i, j) 
+							- matB.getMatrixPos(i, j)));
+			}
+		}
+		return matC;
+	}
+
+
+    /**
+ 	 * method to find the max colum sum.
+ 	 * @return norm double
+	*/
+	public double norm1()
+	{
+		double norm = 0.;
+		double temp = 0.;
+		for (int i = 0; i < getCols(); i++)
+		{
+			for (int j = 0; j < getRows(); j++)
+			{
+				temp += Math.abs(getMatrixPos(j, i));
+			}
+			if (temp > norm)
 			{
 				norm = temp;
 			}

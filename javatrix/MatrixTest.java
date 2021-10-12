@@ -296,6 +296,58 @@ public class MatrixTest {
 		assertEquals(correctValue, A.normInf());
 	}
 	
+    @Test
+	public void testMinus1()
+	{
+		double[][] vals1 = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+		double[][] vals2 = {{1.,4.,7.},{2.,-5.,8.},{3.,6.,9.}};
+		double[][] vals3 = {{0.,-2.,-4.},{2.,0.,-2.},{4.,2.,0.}};
 
+		Matrix A = new Matrix(vals1);
+		Matrix B = new Matrix(vals2);
+		Matrix C = A.minus(B);
+
+		assertArrayEquals(vals3, C.getMatrix());
+	}
+
+	@Test
+        //Test for failure
+	public void testminus2()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,5,7.);
+				Matrix B = new Matrix(3,4,8.);
+
+				Matrix C = A.minus(B);
+			}
+		});
+
+		assertEquals("Cannot Subtract Unequal Size Arrays", exception.getMessage());
+    }
+
+    @Test
+	public void testNorm11()
+	{
+		double[][] vals = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
+		double correctValue = 24.;
+
+		Matrix A = new Matrix(vals);
+		
+		assertEquals(correctValue, A.norm1());
+	}
+
+	@Test
+	public void testNorm12()
+	{
+		double[][] vals = {{-1.,4.,-7.},{2.,5.,8.},{3.,6.,-9.}};
+		double correctValue = 24.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.norm1());
+    }
 }
 
