@@ -210,6 +210,25 @@ public class Matrix
 		return norm;
 	}
 
+    /**
+     * Method to return and identity matrix
+     * @return mat Identity matrix
+     */
+    public static Matrix identity(int m, int n)
+    {
+        Matrix mat = new Matrix(m, n, 0.0);
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (i == j)
+                {
+                     mat.setMatrixPos(i, j, 1.0);
+                }
+            }
+        }
+        return mat;
+    }
 
 	/* getters */
 	/**

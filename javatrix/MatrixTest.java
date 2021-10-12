@@ -349,5 +349,25 @@ public class MatrixTest {
 
 		assertEquals(correctValue, A.norm1());
     }
+
+    @Test
+    public void testIdentity1()
+    {
+        double[][] vals = {{1.0, 0.0, 0.0},{0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+
+        Matrix A = Matrix.identity(3, 3);
+
+        assertArrayEquals(vals, A.getMatrix());
+    }
+
+    @Test
+    public void testIdentity2()
+    {
+        double[][] vals = {{1.0, 0.0},{0.0, 1.0}};
+
+        Matrix A = Matrix.identity(2, 2);
+
+        assertArrayEquals(vals, A.getMatrix());
+    }
 }
 
