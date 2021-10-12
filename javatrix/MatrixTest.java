@@ -296,7 +296,7 @@ public class MatrixTest {
 		assertEquals(correctValue, A.normInf());
 	}
 	
-    	@Test
+   	@Test
 	public void testMinus1()
 	{
 		double[][] vals1 = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
@@ -349,7 +349,7 @@ public class MatrixTest {
 
 		assertEquals(correctValue, A.norm1());
     	}
-
+/*
     	@Test
     	public void testIdentity1()
     	{
@@ -369,7 +369,7 @@ public class MatrixTest {
 
         	assertArrayEquals(vals, A.getMatrix());
     	}
-
+*/
         @Test
         public void testCopy1()
         {
@@ -399,5 +399,37 @@ public class MatrixTest {
             	assertFalse("Matrix cols should not be equal", A.getCols() == B.getCols());
             	assertFalse(Arrays.equals(A.getMatrix(), B.getMatrix()));
         }
+
+    	public void testRandom1()
+    	{   
+        	int correctCols = 3;
+        	int correctRows = 3;
+        
+        	Matrix A = Matrix.random(correctRows, correctCols);
+
+        	assertEquals(correctCols, A.getCols());
+        	assertEquals(correctRows, A.getRows());
+    	}
+
+    	@Test
+    	public void testRandom2()
+    	{	
+        	int inclusiveLowerBound = 0;
+        	int exclusiveUpperBound = 1;
+    
+        	for (int i = 0; i < 10; i++)
+        	{
+            		Matrix A = Matrix.random(3, 3);
+            		for (int rows = 0; rows < A.getRows(); rows++)
+            		{
+                		for (int cols = 0; cols < A.getCols(); cols++)
+                		{
+                    			assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
+                    			assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
+                		}
+            		}
+        	}
+    	}
+
 }
 
