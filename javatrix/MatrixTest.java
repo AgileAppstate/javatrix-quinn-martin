@@ -7,6 +7,7 @@ import org.junit.jupiter.api.function.Executable;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import java.util.Arrays;
 
 /**
  * junit5 test class.
@@ -180,6 +181,26 @@ public class MatrixTest {
 		});
 		assertEquals("Index Out of Bounds", exception.getMessage());
 	}
+
+        public void testArrayCopy1()
+        {
+            	double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
+            	Matrix A = new Matrix(3, 3, 1.0);
+
+            	assertArrayEquals(A.getArrayCopy(), vals);
+        }
+
+        @Test
+        public void testArrayCopy2()
+        {
+            	double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
+            	Matrix A = new Matrix(vals);
+
+            	double[][] copy = A.getArrayCopy();
+            	A.setMatrixPos(0, 0, 77.7);
+
+            	assertFalse(Arrays.equals(A.getMatrix(), copy));
+        }
 
 	@Test
 	public void testTimes1()
@@ -390,7 +411,7 @@ public class MatrixTest {
 		});
 
 		assertEquals("Cannot Subtract Unequal Size Arrays", exception.getMessage());
-   	}
+    	}
 
     	@Test
 	public void testNorm11()
@@ -415,6 +436,55 @@ public class MatrixTest {
     	}
 
     	@Test
+    	public void testIdentity1()
+    	{
+        	double[][] vals = {{1.0, 0.0, 0.0},{0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+
+        	Matrix A = Matrix.identity(3, 3);
+
+        	assertArrayEquals(vals, A.getMatrix());
+	}
+
+    	@Test
+    	public void testIdentity2()
+    	{
+        	double[][] vals = {{1.0, 0.0},{0.0, 1.0}};
+
+        	Matrix A = Matrix.identity(2, 2);
+
+        	assertArrayEquals(vals, A.getMatrix());
+    	}
+
+        @Test
+        public void testCopy1()
+        {
+            	double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+            	Matrix A = new Matrix(vals);
+            	Matrix B = A.copy();
+
+            	assertEquals(A.getRows(), B.getRows());
+            	assertEquals(A.getCols(), B.getCols());
+            	assertArrayEquals(A.getMatrix(), B.getMatrix());
+        }
+
+        @Test
+        public void testCopy2()
+        {
+            	double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+            	Matrix A = new Matrix(vals);
+            	Matrix B = A.copy();
+
+            	A.setRows(10);
+            	A.setCols(10);
+            	A.setMatrixPos(0, 0, 77.7);
+
+            	assertFalse("Matrix rows should not be equal", A.getRows() == B.getRows());
+            	assertFalse("Matrix cols should not be equal", A.getCols() == B.getCols());
+            	assertFalse(Arrays.equals(A.getMatrix(), B.getMatrix()));
+        }
+
     	public void testRandom1()
     	{   
         	int correctCols = 3;
@@ -472,6 +542,5 @@ public class MatrixTest {
 		assertEquals("Trace Must be Called on a Square Matrix", exception.getMessage());
 
 	}
-
 }
 

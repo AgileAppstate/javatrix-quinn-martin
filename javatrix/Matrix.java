@@ -67,7 +67,8 @@ public class Matrix
 	/**
  	 * main method.
  	 * @param args String[]
- 	*/ 
+ 	*/
+ 
 	public static void main(String[] args)
 	{
 
@@ -208,10 +209,31 @@ public class Matrix
 		return norm;
 	}
 
-    	/**
-     	* Method to create an Matrix of random elements.
-     	* @param m int
-     	* @param n int
+	/**
+	 * Method to return and identity matrix.
+	 * @param m int
+	 * @param n int
+	 * @return mat Identity matrix
+	*/
+	public static Matrix identity(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (i == j)
+				{
+					mat.setMatrixPos(i, j, 1.0);
+				}
+			}
+		}
+		return mat;
+	}
+        /**
+        * Method to create an Matrix of random elements.
+        * @param m int
+        * @param n int
      	* @return mat Matrix of random elements
     	*/
 	public static Matrix random(int m, int n)
@@ -226,6 +248,7 @@ public class Matrix
 		}
 		return mat;
 	}
+
 
 	/**
 	 * method to return the sum of the diagonals.
@@ -244,9 +267,44 @@ public class Matrix
 			traceSum += getMatrixPos(i, i);
 		}
 		return traceSum;
+    }
+
+        /**
+         * Method to create a deep copy of a matrix.
+         * @return copy The copied matrix
+         */
+	public Matrix copy()
+	{
+		Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
+
+		for (int i = 0; i < this.getRows(); i++)
+		{
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				copy.setMatrixPos(i, j, this.getMatrixPos(i, j));
+			}
+		}
+		return copy;
 	}
 
 	/* getters */
+	/**
+	 * Method to create a copy of the array.
+	 * @return arr The copied array
+	*/
+	public double[][] getArrayCopy()
+	{
+		double[][] arr = new double[this.getRows()][this.getCols()];
+
+		for (int i = 0; i < this.getRows(); i++)
+		{
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				arr[i][j] = this.getMatrixPos(i, j);
+			}
+		}
+		return arr;
+	}
 	/**
  	 * getter for matrix field.
  	 * @return matrix double[][]
