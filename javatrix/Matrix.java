@@ -272,6 +272,23 @@ public class Matrix
 
 	/* getters */
 	/**
+	 * Method to create a copy of the array.
+	 * @return arr The copied array
+	*/
+        public double[][] getArrayCopy()
+        {
+                double[][] arr = new double[this.getRows()][this.getCols()];
+
+                for (int i = 0; i < this.getRows(); i++)
+                {
+                    	for (int j = 0; j < this.getCols(); j++)
+                    	{
+                        	arr[i][j] = this.getMatrixPos(i, j);
+                    	}
+                }
+                return arr;
+        }
+	/**
  	 * getter for matrix field.
  	 * @return matrix double[][]
  	*/
