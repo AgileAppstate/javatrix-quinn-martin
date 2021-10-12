@@ -349,5 +349,37 @@ public class MatrixTest {
 
 		assertEquals(correctValue, A.norm1());
     }
+
+    @Test
+    public void testRandom1()
+    {   
+        int correctCols = 3;
+        int correctRows = 3;
+        
+        Matrix A = Matrix.random(correctRows, correctCols);
+
+        assertEquals(correctCols, A.getCols());
+        assertEquals(correctRows, A.getRows());
+    }
+
+    @Test
+    public void testRandom2()
+    {
+        int inclusiveLowerBound = 0;
+        int exclusiveUpperBound = 1;
+    
+        for (int i = 0; i < 10; i++)
+        {
+            Matrix A = Matrix.random(3, 3);
+            for (int rows = 0; rows < A.getRows(); rows++)
+            {
+                for (int cols = 0; cols < A.getCols(); cols++)
+                {
+                    assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
+                    assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
+                }
+            }
+        }
+    }
 }
 
