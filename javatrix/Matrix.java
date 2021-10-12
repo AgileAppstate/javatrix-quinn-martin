@@ -120,7 +120,7 @@ public class Matrix
 	}
 
 	/**
-	 * mthod to transpose a matrix.
+	 * method to transpose a matrix.
 	 * @return trans Matrix
 	*/
 	public Matrix transpose()
@@ -136,6 +136,30 @@ public class Matrix
 		return trans;
 	}
 
+	/**
+	 * method to subtract two matrices.
+	 * @param matB Matrix
+	 * @return matC Matrix
+	*/
+	public Matrix minus(Matrix matB)
+	{
+		if (this.getRows() != matB.getRows()
+			 || this.getCols() != matB.getCols())
+		{
+			throw new IllegalArgumentException("Cannot Subtract "
+							+ "Unequal Size Arrays");
+		}
+		Matrix matC = new Matrix(matB.getRows(), matB.getCols(), 0.);
+		for (int i = 0; i < matB.getRows(); i++)
+		{
+			for (int j = 0; j < matB.getCols(); j++)
+			{
+				matC.setMatrixPos(i, j, (this.getMatrixPos(i, j) 
+							- matB.getMatrixPos(i, j)));
+			}
+		}
+		return matC;
+	}
 
 	/* getters */
 	/**
