@@ -542,5 +542,34 @@ public class MatrixTest {
 		assertEquals("Trace Must be Called on a Square Matrix", exception.getMessage());
 
 	}
+
+    @Test
+    public void testPlus1()
+    {
+        double[][] valsA = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+        double[][] valsB = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+        double[][] valsC = {{2.,4.,6},{8.,-10.,12.},{14.,16.,18.}};
+        Matrix A  = new Matrix(valsA);
+        Matrix B  = new Matrix(valsB);
+        Matrix C  = A.plus(B);
+
+        assertArrayEquals(C.getMatrix(), valsC);
+
+    }
+
+    @Test
+    public void testPlus2()
+    {
+        double[][] valsA = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+        double[][] valsB = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+        double[][] valsC = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+
+        Matrix A  = new Matrix(valsA);
+        Matrix B  = new Matrix(valsB);
+        Matrix C  = A.plus(B);
+
+        assertArrayEquals(C.getMatrix(), valsC);
+    }
+
 }
 

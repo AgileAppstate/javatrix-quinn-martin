@@ -287,6 +287,24 @@ public class Matrix
 		return copy;
 	}
 
+    /**
+     * Method to return the sum of two arrays.
+     * @return sum Array of sums
+    */
+    public Matrix plus(Matrix B)
+    {
+        Matrix sum = new Matrix(this.getRows(), this.getCols(), 0.0);
+        for (int i = 0; i < this.getRows(); i++)
+        {
+           for (int j = 0; j < this.getCols(); j++)
+           {
+               sum.setMatrixPos(i, j, this.getMatrixPos(i, j) + B.getMatrixPos(i, j));
+           }
+        }
+        return sum;
+    }
+
+
 	/* getters */
 	/**
 	 * Method to create a copy of the array.
