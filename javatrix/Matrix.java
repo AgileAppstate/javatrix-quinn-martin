@@ -153,13 +153,13 @@ public class Matrix
 				temp += Math.abs(getMatrixPos(i, j));
 			}
 			if (norm < temp)
-            {
-                norm = temp;
-            }
-            temp = 0;
-        }
-        return norm;
-    	}
+			{
+				norm = temp;
+			}
+			temp = 0;
+		}
+		return norm;
+	}
 
     	/**
 	 * method to subtract two matrices.
@@ -210,8 +210,8 @@ public class Matrix
 		return norm;
 	}
 
-    	/**
-     	* Method to create an Matrix of random elements
+	/**
+	* Method to create an Matrix of random elements
      	* @return mat Matrix of random elements
     	*/
     	public static Matrix random(int m, int n)
@@ -220,13 +220,35 @@ public class Matrix
         	for (int i = 0; i < m; i++)
         	{
             		for (int j = 0; j < n; j++)
-            		{
-                	mat.setMatrixPos(i, j, Math.random());
+           		{
+                		if (i == j)
+                		{
+                     			mat.setMatrixPos(i, j, 1.0);
+                		}
+            		
+                		mat.setMatrixPos(i, j, Math.random());
             		}
         	}
         	return mat;
     	}
 
+        /**
+         * Method to create a deep copy of a matrix
+         * @return copy The copied matrix
+         */
+        public Matrix copy()
+        {
+            	Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
+		
+            	for (int i = 0; i < this.getRows(); i++)
+		{
+                	for (int j = 0; j < this.getCols(); j++)
+                	{
+                   		copy.setMatrixPos(i, j, this.getMatrixPos(i, j));
+                	}
+            	}
+            	return copy;
+        }
 
 	/* getters */
 	/**
