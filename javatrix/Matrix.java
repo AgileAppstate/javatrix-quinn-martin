@@ -1,7 +1,5 @@
 package javatrix;
 
-import java.lang.Math;
-
 /**
  * Matrix Class.
  * Matrix.java
@@ -212,7 +210,7 @@ public class Matrix
 	}
 
 	/**
-	 * Method to return and identity matrix
+	 * Method to return and identity matrix.
 	 * @param m int
 	 * @param n int
 	 * @return mat Identity matrix
@@ -253,41 +251,41 @@ public class Matrix
 	}
 
         /**
-         * Method to create a deep copy of a matrix
+         * Method to create a deep copy of a matrix.
          * @return copy The copied matrix
          */
-        public Matrix copy()
-        {
-            	Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
-		
-            	for (int i = 0; i < this.getRows(); i++)
+	public Matrix copy()
+	{
+		Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
+
+		for (int i = 0; i < this.getRows(); i++)
 		{
-                	for (int j = 0; j < this.getCols(); j++)
-                	{
-                   		copy.setMatrixPos(i, j, this.getMatrixPos(i, j));
-                	}
-            	}
-            	return copy;
-        }
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				copy.setMatrixPos(i, j, this.getMatrixPos(i, j));
+			}
+		}
+		return copy;
+	}
 
 	/* getters */
 	/**
 	 * Method to create a copy of the array.
 	 * @return arr The copied array
 	*/
-        public double[][] getArrayCopy()
-        {
-                double[][] arr = new double[this.getRows()][this.getCols()];
+	public double[][] getArrayCopy()
+	{
+		double[][] arr = new double[this.getRows()][this.getCols()];
 
-                for (int i = 0; i < this.getRows(); i++)
-                {
-                    	for (int j = 0; j < this.getCols(); j++)
-                    	{
-                        	arr[i][j] = this.getMatrixPos(i, j);
-                    	}
-                }
-                return arr;
-        }
+		for (int i = 0; i < this.getRows(); i++)
+		{
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				arr[i][j] = this.getMatrixPos(i, j);
+			}
+		}
+		return arr;
+	}
 	/**
  	 * getter for matrix field.
  	 * @return matrix double[][]
