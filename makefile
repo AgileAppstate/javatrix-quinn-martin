@@ -27,7 +27,7 @@ help:
 	@echo "________ make clean ; make compile ; make test ; make chkstyle"
 
 compile: $(PKG)Matrix.java $(PKG)MatrixTest.java $(JUNIT5_JAR) Testtrix.java
-	javac -cp .:$(JUNIT5_JAR) javatrix/MatrixTest.java
+	javac -cp .:$(JUNIT5_JAR) $(PKG)MatrixTest.java
 	javac $(PKG)Matrix.java
 	javac Testtrix.java
 
