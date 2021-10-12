@@ -182,7 +182,8 @@ public class MatrixTest {
 		assertEquals("Index Out of Bounds", exception.getMessage());
 	}
 
-        public void testArrayCopy1()
+        @Test
+	public void testArrayCopy1()
         {
             	double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
             	Matrix A = new Matrix(3, 3, 1.0);
@@ -397,7 +398,7 @@ public class MatrixTest {
 
 	@Test
         //Test for failure
-	public void testminus2()
+	public void testMinus2()
 	{
 		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
 		{
@@ -570,6 +571,36 @@ public class MatrixTest {
 
         assertArrayEquals(C.getMatrix(), valsC);
     }
+
+        @Test
+        public void testClone1()
+        {
+                double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+                Matrix A = new Matrix(vals);
+                Matrix B = (Matrix) A.clone();
+
+                assertEquals(A.getRows(), B.getRows());
+                assertEquals(A.getCols(), B.getCols());
+                assertArrayEquals(A.getMatrix(), B.getMatrix());
+        }
+
+        @Test
+        public void testClone2()
+        {
+                double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+                Matrix A = new Matrix(vals);
+                Matrix B = (Matrix) A.clone();
+
+                A.setRows(10);
+                A.setCols(10);
+                A.setMatrixPos(0, 0, 77.7);
+
+                assertFalse("Matrix rows should not be equal", A.getRows() == B.getRows());
+                assertFalse("Matrix cols should not be equal", A.getCols() == B.getCols());
+                assertFalse(Arrays.equals(A.getMatrix(), B.getMatrix()));
+        }
 
 }
 
