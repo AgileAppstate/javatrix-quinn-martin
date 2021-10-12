@@ -139,6 +139,29 @@ public class Matrix
 	}
 
 	/**
+	 * method to compute maximum row sum.
+	 * @return norm double
+	*/
+	public double normInf()
+	{
+		double norm = 0.;
+		double temp = 0.;
+		for (int i = 0; i < getRows(); i++)
+		{
+			for (int j = 0; j < getCols(); j++)
+			{
+				temp += Math.abs(getMatrixPos(i, j));
+			}
+			if (norm < temp)
+            {
+                norm = temp;
+            }
+            temp = 0;
+        }
+        return norm;
+    }
+
+    /**
 	 * method to subtract two matrices.
 	 * @param matB Matrix
 	 * @return matC Matrix

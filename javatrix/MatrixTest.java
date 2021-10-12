@@ -275,6 +275,28 @@ public class MatrixTest {
 	}
 
 	@Test
+	public void testNormInf1()
+	{
+		double[][] vals = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
+		double correctValue = 18.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.normInf());
+	}
+
+	@Test
+	public void testNormInf2()
+	{
+		double[][] vals = {{-1.,4.,-7.},{2.,5.,8.},{3.,-6.,-9.}};
+		double correctValue = 18.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.normInf());
+	}
+	
+    @Test
 	public void testMinus1()
 	{
 		double[][] vals1 = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
@@ -326,7 +348,6 @@ public class MatrixTest {
 		Matrix A = new Matrix(vals);
 
 		assertEquals(correctValue, A.norm1());
-	}
-
+    }
 }
 
