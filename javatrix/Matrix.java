@@ -211,8 +211,8 @@ public class Matrix
 	}
 
     	/**
-     	* Method to create an Matrix of random elements
-     	* @return mat Matrix of random elements
+     	 * Method to create an Matrix of random elements
+     	 * @return mat Matrix of random elements
     	*/
     	public static Matrix random(int m, int n)
     	{
@@ -230,17 +230,17 @@ public class Matrix
         /**
          * Method to create a copy of the array
          * @return arr The copied array
-         */
+        */
         public double[][] getArrayCopy()
         {
                 double[][] arr = new double[this.getRows()][this.getCols()];
         
                 for (int i = 0; i < this.getRows(); i++)
                 {
-                    for (int j = 0; j < this.getCols(); j++)
-                    {
-                        arr[i][j] = this.getMatrixPos(i, j);
-                    }
+                    	for (int j = 0; j < this.getCols(); j++)
+                    	{
+                        	arr[i][j] = this.getMatrixPos(i, j);
+                    	}
                 }
                 return arr;
         }
