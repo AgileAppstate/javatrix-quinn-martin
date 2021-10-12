@@ -230,6 +230,23 @@ public class Matrix
         	return mat;
     	}
 
+        /**
+         * Method to create a deep copy of a matrix
+         * @return copy The copied matrix
+         */
+        public Matrix copy()
+        {
+            Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
+            for (int i = 0; i < this.getRows(); i++)
+            {
+                for (int j = 0; j < this.getCols(); j++)
+                {
+                    copy.setMatrixPos(i, j, this.getMatrixPos(i, j));
+                }
+            }
+            return copy;
+        }
+
 	/* getters */
 	/**
  	 * getter for matrix field.
