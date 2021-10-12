@@ -7,6 +7,7 @@ import org.junit.jupiter.api.function.Executable;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import java.util.Arrays;
 
 /**
  * junit5 test class.
@@ -381,5 +382,26 @@ public class MatrixTest {
             		}
         	}
     	}
+
+        @Test
+        public void testArrayCopy1()
+        {
+            double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
+            Matrix A = new Matrix(3, 3, 1.0);
+
+            assertArrayEquals(A.getArrayCopy(), vals);
+        }
+
+        @Test
+        public void testArrayCopy2()
+        {
+            double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
+            Matrix A = new Matrix(vals);
+
+            double[][] copy = A.getArrayCopy();
+            A.setMatrixPos(0, 0, 77.7);
+
+            assertFalse(Arrays.equals(A.getMatrix(), copy));
+        }
 }
 
