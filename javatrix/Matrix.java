@@ -68,8 +68,7 @@ public class Matrix implements Cloneable
  	 * main method.
  	 * @param args String[]
  	*/
- 
-	public static void main(String[] args)
+ 	public static void main(String[] args)
 	{
 
 	}
@@ -230,11 +229,10 @@ public class Matrix implements Cloneable
 		}
 		return mat;
 	}
-
-	/**
-	* Method to create an Matrix of random elements.
-	* @param m int
-	* @param n int
+        /**
+        * Method to create an Matrix of random elements.
+        * @param m int
+        * @param n int
      	* @return mat Matrix of random elements
     	*/
 	public static Matrix random(int m, int n)
@@ -249,6 +247,26 @@ public class Matrix implements Cloneable
 		}
 		return mat;
 	}
+
+
+	/**
+	 * method to return the sum of the diagonals.
+	 * @return traceSum double
+	*/
+	public double trace()
+	{
+		if (getRows() != getCols())
+		{
+			throw new IllegalArgumentException("Trace Must be Called " 
+							+ "on a Square Matrix");
+		}
+		int traceSum = 0;
+		for (int i = 0; i < getRows(); i++)
+		{
+			traceSum += getMatrixPos(i, i);
+		}
+		return traceSum;
+    }
 
         /**
          * Method to create a deep copy of a matrix.
@@ -268,16 +286,34 @@ public class Matrix implements Cloneable
 		return copy;
 	}
 
-        /**
-         * Method to create a clone of a matrix.
-         * @return clone The cloned matrix
-         */
-    public Object clone()
-    {
-        Matrix clone = this.copy();
-        return (Object) clone;
-    }
+	/**
+	* Method to create a clone of a matrix.
+	* @return clone The cloned matrix
+	*/
+	public Object clone()
+	{
+		Matrix clone = this.copy();
+		return (Object) clone;
+	}
 
+	/**
+	* Method to return the sum of two arrays.
+	* @param matB Matrix
+	* @return sum Matrix of sums
+	*/
+	public Matrix plus(Matrix matB)
+	{
+		Matrix sum = new Matrix(this.getRows(), this.getCols(), 0.0);
+		for (int i = 0; i < this.getRows(); i++)
+		{
+			for (int j = 0; j < this.getCols(); j++)
+			{
+				sum.setMatrixPos(i, j, this.getMatrixPos(i, j) 
+						+ matB.getMatrixPos(i, j));
+			}
+		}
+		return sum;
+	}
 
 	/* getters */
 	/**
@@ -313,6 +349,11 @@ public class Matrix implements Cloneable
 	*/
 	public double getMatrixPos(int m, int n)
 	{
+		if (m >= getRows() || n >= getCols() 
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
 		return matrix[m][n];
 	}
 	/**
@@ -349,6 +390,12 @@ public class Matrix implements Cloneable
 	*/
 	public void setMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] = s;
 	}
 	/**
@@ -359,6 +406,12 @@ public class Matrix implements Cloneable
 	*/
 	public void incrMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] += s;
 	}
 	/**
@@ -369,6 +422,12 @@ public class Matrix implements Cloneable
  	*/
 	public void decrMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] -= s;
 	}
 	/**

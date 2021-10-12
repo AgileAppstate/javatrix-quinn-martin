@@ -119,7 +119,71 @@ public class MatrixTest {
 	}
 
 	@Test
-        public void testArrayCopy1()
+	//Test for failure
+	public void testSetters5()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.getMatrixPos(-3,3);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters6()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.setMatrixPos(4,2,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters7()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.incrMatrixPos(3,1,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters8()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.incrMatrixPos(2,4,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+        @Test
+	public void testArrayCopy1()
         {
             	double[][] vals = {{1.0, 1.0, 1.0}, {1.0, 1.0 ,1.0}, {1.0, 1.0, 1.0}};
             	Matrix A = new Matrix(3, 3, 1.0);
@@ -334,7 +398,7 @@ public class MatrixTest {
 
 	@Test
         //Test for failure
-	public void testminus2()
+	public void testMinus2()
 	{
 		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
 		{
@@ -433,25 +497,80 @@ public class MatrixTest {
         	assertEquals(correctRows, A.getRows());
     	}
 
-    	@Test
-    	public void testRandom2()
-    	{	
-        	int inclusiveLowerBound = 0;
-        	int exclusiveUpperBound = 1;
-    
-        	for (int i = 0; i < 10; i++)
-        	{
-            		Matrix A = Matrix.random(3, 3);
-            		for (int rows = 0; rows < A.getRows(); rows++)
-            		{
-                		for (int cols = 0; cols < A.getCols(); cols++)
-                		{
-                    			assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
-                    			assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
-                		}
-            		}
-        	}
-    	}
+	@Test
+	public void testRandom2()
+	{
+		int inclusiveLowerBound = 0;
+		int exclusiveUpperBound = 1;
+
+		for (int i = 0; i < 10; i++)
+		{
+			Matrix A = Matrix.random(3, 3);
+			for (int rows = 0; rows < A.getRows(); rows++)
+			{
+				for (int cols = 0; cols < A.getCols(); cols++)
+				{
+					assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
+					assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
+				}
+			}
+		}
+	}
+
+	@Test
+	public void testTrace1()
+	{
+		double[][] vals = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+		Matrix A = new Matrix(vals);
+
+		assertEquals(5., A.trace());
+
+	}
+
+	@Test
+	//Test for failure
+	public void testTrace2()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,5,7.);
+				A.trace();
+			}
+		});
+
+		assertEquals("Trace Must be Called on a Square Matrix", exception.getMessage());
+
+	}
+
+    @Test
+    public void testPlus1()
+    {
+        double[][] valsA = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+        double[][] valsB = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+        double[][] valsC = {{2.,4.,6},{8.,-10.,12.},{14.,16.,18.}};
+        Matrix A  = new Matrix(valsA);
+        Matrix B  = new Matrix(valsB);
+        Matrix C  = A.plus(B);
+
+        assertArrayEquals(C.getMatrix(), valsC);
+
+    }
+
+    @Test
+    public void testPlus2()
+    {
+        double[][] valsA = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+        double[][] valsB = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+        double[][] valsC = {{0.,0.,0},{0.,0.,0.},{0.,0.,0.}};
+
+        Matrix A  = new Matrix(valsA);
+        Matrix B  = new Matrix(valsB);
+        Matrix C  = A.plus(B);
+
+        assertArrayEquals(C.getMatrix(), valsC);
+    }
 
         @Test
         public void testClone1()
