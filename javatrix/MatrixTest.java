@@ -287,6 +287,7 @@ public class MatrixTest {
 
 		assertArrayEquals(vals3, C.getMatrix());
 	}
+
 	@Test
         //Test for failure
 	public void testminus2()
@@ -303,6 +304,28 @@ public class MatrixTest {
 		});
 
 		assertEquals("Cannot Subtract Unequal Size Arrays", exception.getMessage());
+    }
+
+    @Test
+	public void testNorm11()
+	{
+		double[][] vals = {{1.,4.,7.},{2.,5.,8.},{3.,6.,9.}};
+		double correctValue = 24.;
+
+		Matrix A = new Matrix(vals);
+		
+		assertEquals(correctValue, A.norm1());
+	}
+
+	@Test
+	public void testNorm12()
+	{
+		double[][] vals = {{-1.,4.,-7.},{2.,5.,8.},{3.,6.,-9.}};
+		double correctValue = 24.;
+
+		Matrix A = new Matrix(vals);
+
+		assertEquals(correctValue, A.norm1());
 	}
 
 }
