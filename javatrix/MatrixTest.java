@@ -118,6 +118,70 @@ public class MatrixTest {
 	}
 
 	@Test
+	//Test for failure
+	public void testSetters5()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.getMatrixPos(-3,3);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters6()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.setMatrixPos(4,2,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters7()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.incrMatrixPos(3,1,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
+	//Test for failure
+	public void testSetters8()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			@Override
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,4,.7);
+				A.incrMatrixPos(2,4,1.);
+			}
+		});
+		assertEquals("Index Out of Bounds", exception.getMessage());
+	}
+
+	@Test
 	public void testTimes1()
 	{
 		double[][] vals1 = {{3.,4.},{7.,2.},{5.,9.}};
@@ -362,24 +426,52 @@ public class MatrixTest {
         	assertEquals(correctRows, A.getRows());
     	}
 
-    	@Test
-    	public void testRandom2()
-    	{	
-        	int inclusiveLowerBound = 0;
-        	int exclusiveUpperBound = 1;
-    
-        	for (int i = 0; i < 10; i++)
-        	{
-            		Matrix A = Matrix.random(3, 3);
-            		for (int rows = 0; rows < A.getRows(); rows++)
-            		{
-                		for (int cols = 0; cols < A.getCols(); cols++)
-                		{
-                    			assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
-                    			assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
-                		}
-            		}
-        	}
-    	}
+	@Test
+	public void testRandom2()
+	{
+		int inclusiveLowerBound = 0;
+		int exclusiveUpperBound = 1;
+
+		for (int i = 0; i < 10; i++)
+		{
+			Matrix A = Matrix.random(3, 3);
+			for (int rows = 0; rows < A.getRows(); rows++)
+			{
+				for (int cols = 0; cols < A.getCols(); cols++)
+				{
+					assertTrue(A.getMatrixPos(rows, cols) < exclusiveUpperBound);
+					assertTrue(A.getMatrixPos(rows, cols) >= inclusiveLowerBound);
+				}
+			}
+		}
+	}
+
+	@Test
+	public void testTrace1()
+	{
+		double[][] vals = {{1.,2.,3},{4.,-5.,6.},{7.,8.,9.}};
+		Matrix A = new Matrix(vals);
+
+		assertEquals(5., A.trace());
+
+	}
+
+	@Test
+	//Test for failure
+	public void testTrace2()
+	{
+		Throwable exception = assertThrows(IllegalArgumentException.class, new Executable()
+		{
+			public void execute() throws Throwable
+			{
+				Matrix A = new Matrix(3,5,7.);
+				A.trace();
+			}
+		});
+
+		assertEquals("Trace Must be Called on a Square Matrix", exception.getMessage());
+
+	}
+
 }
 

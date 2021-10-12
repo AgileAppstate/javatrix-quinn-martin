@@ -1,7 +1,5 @@
 package javatrix;
 
-import java.lang.Math;
-
 /**
  * Matrix Class.
  * Matrix.java
@@ -153,13 +151,13 @@ public class Matrix
 				temp += Math.abs(getMatrixPos(i, j));
 			}
 			if (norm < temp)
-            {
-                norm = temp;
-            }
-            temp = 0;
-        }
-        return norm;
-    	}
+			{
+				norm = temp;
+			}
+			temp = 0;
+		}
+		return norm;
+	}
 
     	/**
 	 * method to subtract two matrices.
@@ -211,22 +209,42 @@ public class Matrix
 	}
 
     	/**
-     	* Method to create an Matrix of random elements
+     	* Method to create an Matrix of random elements.
+     	* @param m int
+     	* @param n int
      	* @return mat Matrix of random elements
     	*/
-    	public static Matrix random(int m, int n)
-    	{
-        	Matrix mat = new Matrix(m, n, 0.0);
-        	for (int i = 0; i < m; i++)
-        	{
-            		for (int j = 0; j < n; j++)
-            		{
-                	mat.setMatrixPos(i, j, Math.random());
-            		}
-        	}
-        	return mat;
-    	}
+	public static Matrix random(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				mat.setMatrixPos(i, j, Math.random());
+			}
+		}
+		return mat;
+	}
 
+	/**
+	 * method to return the sum of the diagonals.
+	 * @return traceSum double
+	*/
+	public double trace()
+	{
+		if (getRows() != getCols())
+		{
+			throw new IllegalArgumentException("Trace Must be Called " 
+							+ "on a Square Matrix");
+		}
+		int traceSum = 0;
+		for (int i = 0; i < getRows(); i++)
+		{
+			traceSum += getMatrixPos(i, i);
+		}
+		return traceSum;
+	}
 
 	/* getters */
 	/**
@@ -245,6 +263,11 @@ public class Matrix
 	*/
 	public double getMatrixPos(int m, int n)
 	{
+		if (m >= getRows() || n >= getCols() 
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
 		return matrix[m][n];
 	}
 	/**
@@ -281,6 +304,12 @@ public class Matrix
 	*/
 	public void setMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] = s;
 	}
 	/**
@@ -291,6 +320,12 @@ public class Matrix
 	*/
 	public void incrMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] += s;
 	}
 	/**
@@ -301,6 +336,12 @@ public class Matrix
  	*/
 	public void decrMatrixPos(int m, int n, double s)
 	{
+		if (m >= getRows() || n >= getCols()
+			|| m < 0 || n < 0)
+		{
+			throw new IllegalArgumentException("Index Out of Bounds");
+		}
+
 		matrix[m][n] -= s;
 	}
 	/**
