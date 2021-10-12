@@ -69,7 +69,8 @@ public class Matrix
 	/**
  	 * main method.
  	 * @param args String[]
- 	*/ 
+ 	*/
+ 
 	public static void main(String[] args)
 	{
 
@@ -211,26 +212,45 @@ public class Matrix
 	}
 
 	/**
-	* Method to create an Matrix of random elements
+	 * Method to return and identity matrix
+	 * @param m int
+	 * @param n int
+	 * @return mat Identity matrix
+	*/
+	public static Matrix identity(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (i == j)
+				{
+					mat.setMatrixPos(i, j, 1.0);
+				}
+			}
+		}
+		return mat;
+	}
+
+	/**
+	* Method to create an Matrix of random elements.
+	* @param m int
+	* @param n int
      	* @return mat Matrix of random elements
     	*/
-    	public static Matrix random(int m, int n)
-    	{
-        	Matrix mat = new Matrix(m, n, 0.0);
-        	for (int i = 0; i < m; i++)
-        	{
-            		for (int j = 0; j < n; j++)
-           		{
-                		if (i == j)
-                		{
-                     			mat.setMatrixPos(i, j, 1.0);
-                		}
-            		
-                		mat.setMatrixPos(i, j, Math.random());
-            		}
-        	}
-        	return mat;
-    	}
+	public static Matrix random(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				mat.setMatrixPos(i, j, Math.random());
+			}
+		}
+		return mat;
+	}
 
         /**
          * Method to create a deep copy of a matrix

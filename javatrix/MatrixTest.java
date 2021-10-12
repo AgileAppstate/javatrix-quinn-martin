@@ -349,7 +349,7 @@ public class MatrixTest {
 
 		assertEquals(correctValue, A.norm1());
     	}
-/*
+
     	@Test
     	public void testIdentity1()
     	{
@@ -369,7 +369,7 @@ public class MatrixTest {
 
         	assertArrayEquals(vals, A.getMatrix());
     	}
-*/
+
         @Test
         public void testCopy1()
         {
