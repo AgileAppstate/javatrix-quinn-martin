@@ -153,12 +153,12 @@ public class Matrix
 				temp += Math.abs(getMatrixPos(i, j));
 			}
 			if (norm < temp)
-            {
-                norm = temp;
-            }
-            temp = 0;
-        }
-        return norm;
+            		{
+                		norm = temp;
+            		}
+            		temp = 0;
+        	}
+        	return norm;
     	}
 
     	/**
@@ -221,7 +221,7 @@ public class Matrix
         	{
             		for (int j = 0; j < n; j++)
             		{
-                	mat.setMatrixPos(i, j, Math.random());
+                		mat.setMatrixPos(i, j, Math.random());
             		}
         	}
         	return mat;
