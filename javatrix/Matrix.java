@@ -153,15 +153,15 @@ public class Matrix
 				temp += Math.abs(getMatrixPos(i, j));
 			}
 			if (norm < temp)
-            {
-                norm = temp;
-            }
-            temp = 0;
-        }
-        return norm;
-    }
+            		{
+                		norm = temp;
+            		}
+            		temp = 0;
+        	}
+        	return norm;
+    	}
 
-    /**
+    	/**
 	 * method to subtract two matrices.
 	 * @param matB Matrix
 	 * @return matC Matrix
@@ -210,25 +210,25 @@ public class Matrix
 		return norm;
 	}
 
-    /**
-     * Method to return and identity matrix
-     * @return mat Identity matrix
-     */
-    public static Matrix identity(int m, int n)
-    {
-        Matrix mat = new Matrix(m, n, 0.0);
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (i == j)
-                {
-                     mat.setMatrixPos(i, j, 1.0);
-                }
-            }
-        }
-        return mat;
-    }
+    	/**
+     	* Method to return and identity matrix
+     	* @return mat Identity matrix
+     	*/
+    	public static Matrix identity(int m, int n)
+    	{
+        	Matrix mat = new Matrix(m, n, 0.0);
+        	for (int i = 0; i < m; i++)
+        	{
+            		for (int j = 0; j < n; j++)
+           		{
+                		if (i == j)
+                		{
+                     			mat.setMatrixPos(i, j, 1.0);
+                		}
+            		}
+        	}
+        	return mat;
+    	}
 
 	/* getters */
 	/**
