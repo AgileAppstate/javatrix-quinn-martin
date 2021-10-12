@@ -8,7 +8,7 @@ package javatrix;
  * @version Fall 2021
 */
 
-public class Matrix
+public class Matrix implements Cloneable
 {
 	/*
  	 * Matrix class fields.
@@ -267,6 +267,17 @@ public class Matrix
 		}
 		return copy;
 	}
+
+        /**
+         * Method to create a clone of a matrix.
+         * @return clone The cloned matrix
+         */
+    public Object clone()
+    {
+        Matrix clone = this.copy();
+        return (Object) clone;
+    }
+
 
 	/* getters */
 	/**

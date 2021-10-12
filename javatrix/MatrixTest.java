@@ -453,5 +453,35 @@ public class MatrixTest {
         	}
     	}
 
+        @Test
+        public void testClone1()
+        {
+                double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+                Matrix A = new Matrix(vals);
+                Matrix B = (Matrix) A.clone();
+
+                assertEquals(A.getRows(), B.getRows());
+                assertEquals(A.getCols(), B.getCols());
+                assertArrayEquals(A.getMatrix(), B.getMatrix());
+        }
+
+        @Test
+        public void testClone2()
+        {
+                double[][] vals = {{1.0, 2.0, 3.0},{4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+                Matrix A = new Matrix(vals);
+                Matrix B = (Matrix) A.clone();
+
+                A.setRows(10);
+                A.setCols(10);
+                A.setMatrixPos(0, 0, 77.7);
+
+                assertFalse("Matrix rows should not be equal", A.getRows() == B.getRows());
+                assertFalse("Matrix cols should not be equal", A.getCols() == B.getCols());
+                assertFalse(Arrays.equals(A.getMatrix(), B.getMatrix()));
+        }
+
 }
 
