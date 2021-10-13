@@ -74,7 +74,44 @@ public class Matrix implements Cloneable
 	}
 
 	/**
- 	 * method to multiply two matrices.
+	 * method to print a Matrix.
+	 * @param w int
+	 * @param d int
+	*/
+	public void print(int w, int d)
+	{
+		String format = "%" + w + "." + d + "f";
+		for (int m = 0; m < getRows(); m++)
+		{
+			for (int n = 0; n < getCols(); n++)
+			{
+				System.out.printf(format, getMatrixPos(m, n));
+			}
+			System.out.println("");
+		}
+	}
+
+	/**
+	 * method to create a mxn Matrix of random elements.
+	 * @param m int
+	 * @param n int
+	 * @return mat Matrix of random elements
+	*/
+	public static Matrix random(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				mat.setMatrixPos(i, j, Math.random());
+			}
+		}
+		return mat;
+	}
+
+	/**
+ 	 * method to multiply two Matrices.
  	 * @param matB Matrix
  	 * @return matC Matrix
  	*/ 
@@ -102,21 +139,69 @@ public class Matrix implements Cloneable
 	}
 
 	/**
- 	 * method to print a matrix.
- 	 * @param w int
- 	 * @param d int
- 	*/
-	public void print(int w, int d)
+	 * method to return the sum of two Matrices.
+	 * @param matB Matrix
+	 * @return sum Matrix of sums
+	*/
+	public Matrix plus(Matrix matB)
 	{
-		String format = "%" + w + "." + d + "f";
-		for (int m = 0; m < getRows(); m++)
+		Matrix sum = new Matrix(this.getRows(), this.getCols(), 0.0);
+		for (int i = 0; i < this.getRows(); i++)
 		{
-			for (int n = 0; n < getCols(); n++)
+			for (int j = 0; j < this.getCols(); j++)
 			{
-				System.out.printf(format, getMatrixPos(m, n));
+				sum.setMatrixPos(i, j, this.getMatrixPos(i, j)
+						+ matB.getMatrixPos(i, j));
 			}
-			System.out.println("");
 		}
+		return sum;
+	}
+
+	/**
+	 * method to subtract two matrices.
+	 * @param matB Matrix
+	 * @return matC Matrix
+	*/
+	public Matrix minus(Matrix matB)
+	{
+		if (this.getRows() != matB.getRows()
+			|| this.getCols() != matB.getCols())
+		{
+			throw new IllegalArgumentException("Cannot Subtract "
+							+ "Unequal Size Arrays");
+		}
+		Matrix matC = new Matrix(matB.getRows(), matB.getCols(), 0.);
+		for (int i = 0; i < matB.getRows(); i++)
+		{
+			for (int j = 0; j < matB.getCols(); j++)
+			{
+				matC.setMatrixPos(i, j, (this.getMatrixPos(i, j)
+						- matB.getMatrixPos(i, j)));
+			}
+		}
+		return matC;
+	}
+
+	/**
+	 * method to return a mxn identity matrix.
+	 * @param m int
+	 * @param n int
+	 * @return mat Identity matrix
+	*/
+	public static Matrix identity(int m, int n)
+	{
+		Matrix mat = new Matrix(m, n, 0.0);
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (i == j)
+				{
+					mat.setMatrixPos(i, j, 1.0);
+				}
+			}
+		}
+		return mat;
 	}
 
 	/**
@@ -137,57 +222,27 @@ public class Matrix implements Cloneable
 	}
 
 	/**
-	 * method to compute maximum row sum.
-	 * @return norm double
+	 * method to return the sum of the diagonals.
+	 * @return traceSum double
 	*/
-	public double normInf()
+	public double trace()
 	{
-		double norm = 0.;
-		double temp = 0.;
+		if (getRows() != getCols())
+		{
+			throw new IllegalArgumentException("Trace Must be Called "
+							+ "on a Square Matrix");
+		}
+		double traceSum = 0;
 		for (int i = 0; i < getRows(); i++)
 		{
-			for (int j = 0; j < getCols(); j++)
-			{
-				temp += Math.abs(getMatrixPos(i, j));
-			}
-			if (norm < temp)
-			{
-				norm = temp;
-			}
-			temp = 0;
+			traceSum += getMatrixPos(i, i);
 		}
-		return norm;
+		return traceSum;
 	}
 
-    	/**
-	 * method to subtract two matrices.
-	 * @param matB Matrix
-	 * @return matC Matrix
-	*/
-	public Matrix minus(Matrix matB)
-	{
-		if (this.getRows() != matB.getRows()
-			 || this.getCols() != matB.getCols())
-		{
-			throw new IllegalArgumentException("Cannot Subtract "
-							+ "Unequal Size Arrays");
-		}
-		Matrix matC = new Matrix(matB.getRows(), matB.getCols(), 0.);
-		for (int i = 0; i < matB.getRows(); i++)
-		{
-			for (int j = 0; j < matB.getCols(); j++)
-			{
-				matC.setMatrixPos(i, j, (this.getMatrixPos(i, j) 
-							- matB.getMatrixPos(i, j)));
-			}
-		}
-		return matC;
-	}
-
-
-    	/**
- 	 * method to find the max colum sum.
- 	 * @return norm double
+	/**
+	 * method to find the max column sum.
+	 * @return norm double
 	*/
 	public double norm1()
 	{
@@ -209,69 +264,32 @@ public class Matrix implements Cloneable
 	}
 
 	/**
-	 * Method to return and identity matrix.
-	 * @param m int
-	 * @param n int
-	 * @return mat Identity matrix
+	 * method to compute max row sum.
+	 * @return norm double
 	*/
-	public static Matrix identity(int m, int n)
+	public double normInf()
 	{
-		Matrix mat = new Matrix(m, n, 0.0);
-		for (int i = 0; i < m; i++)
-		{
-			for (int j = 0; j < n; j++)
-			{
-				if (i == j)
-				{
-					mat.setMatrixPos(i, j, 1.0);
-				}
-			}
-		}
-		return mat;
-	}
-        /**
-        * Method to create an Matrix of random elements.
-        * @param m int
-        * @param n int
-     	* @return mat Matrix of random elements
-    	*/
-	public static Matrix random(int m, int n)
-	{
-		Matrix mat = new Matrix(m, n, 0.0);
-		for (int i = 0; i < m; i++)
-		{
-			for (int j = 0; j < n; j++)
-			{
-				mat.setMatrixPos(i, j, Math.random());
-			}
-		}
-		return mat;
-	}
-
-
-	/**
-	 * method to return the sum of the diagonals.
-	 * @return traceSum double
-	*/
-	public double trace()
-	{
-		if (getRows() != getCols())
-		{
-			throw new IllegalArgumentException("Trace Must be Called " 
-							+ "on a Square Matrix");
-		}
-		int traceSum = 0;
+		double norm = 0.;
+		double temp = 0.;
 		for (int i = 0; i < getRows(); i++)
 		{
-			traceSum += getMatrixPos(i, i);
+			for (int j = 0; j < getCols(); j++)
+			{
+				temp += Math.abs(getMatrixPos(i, j));
+			}
+			if (norm < temp)
+			{
+				norm = temp;
+			}
+			temp = 0;
 		}
-		return traceSum;
-    }
+		return norm;
+	}
 
-        /**
-         * Method to create a deep copy of a matrix.
-         * @return copy The copied matrix
-         */
+	/**
+	 * method to create a deep copy of a Matrix.
+	 * @return copy The copied matrix
+	*/
 	public Matrix copy()
 	{
 		Matrix copy = new Matrix(this.getRows(), this.getCols(), 0);
@@ -287,8 +305,8 @@ public class Matrix implements Cloneable
 	}
 
 	/**
-	* Method to create a clone of a matrix.
-	* @return clone The cloned matrix
+	 * method to create a clone of a Matrix.
+	 * @return clone The cloned matrix
 	*/
 	public Object clone()
 	{
@@ -297,27 +315,7 @@ public class Matrix implements Cloneable
 	}
 
 	/**
-	* Method to return the sum of two arrays.
-	* @param matB Matrix
-	* @return sum Matrix of sums
-	*/
-	public Matrix plus(Matrix matB)
-	{
-		Matrix sum = new Matrix(this.getRows(), this.getCols(), 0.0);
-		for (int i = 0; i < this.getRows(); i++)
-		{
-			for (int j = 0; j < this.getCols(); j++)
-			{
-				sum.setMatrixPos(i, j, this.getMatrixPos(i, j) 
-						+ matB.getMatrixPos(i, j));
-			}
-		}
-		return sum;
-	}
-
-	/* getters */
-	/**
-	 * Method to create a copy of the array.
+	 * method to create a copy of a Matrix array.
 	 * @return arr The copied array
 	*/
 	public double[][] getArrayCopy()
@@ -333,6 +331,8 @@ public class Matrix implements Cloneable
 		}
 		return arr;
 	}
+
+	/* getters */
 	/**
  	 * getter for matrix field.
  	 * @return matrix double[][]
